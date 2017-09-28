@@ -50,12 +50,12 @@ func main() {
 		for {
 			time.Sleep(2 * time.Second) //wait two seconds
 			if myPerson.Age < 40 {      // if not age'd out
-				myJson, err := json.Marshal(myPerson) //marshal variable into json for sending err
+				JsonToView, err := json.Marshal(myPerson) //marshal variable into json for sending err
 				if err != nil {
 					fmt.Println(err)
 					return
 				}
-				err = conn.WriteMessage(websocket.TextMessage, myJson) //sends JSON that contains person variable to view
+				err = conn.WriteMessage(websocket.TextMessage, JsonToView) //sends JSON that contains person variable to view
 				if err != nil {
 					fmt.Println(err)
 					break
