@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Socket To Me</title>
+
+    <script type="text/javascript">
+
+        <!-- fxn to start the socket connection, gets called by the button below -->
+        function myWebsocketStart()
+        {
+            var ws = new WebSocket("ws://localhost:3000/websocket");
+
+            <!-- Appends new messages into the text area -->
+            ws.onmessage = function (evt)
+            {
+                var myTextArea = document.getElementById("textarea1");
+                myTextArea.value = myTextArea.value + "\n" + evt.data
+            };
+
+            <!-- Appends closure notice into the text area -->
+            ws.onclose = function()
+            {
+                var myTextArea = document.getElementById("textarea1");
+                myTextArea.value = myTextArea.value + "\n" + "Connection closed";
+            };
+        }
+    </script>
+
+</head>
+<body>
+    <!-- Creates button to start connection -->
+    <button onclick="myWebsocketStart()">Subscribe</button>
+
+    <!-- Creates a text area to view messages from the connection -->
+    <textarea id = "textarea1">MyTextArea</textarea>
+
+</body>
+</html>
